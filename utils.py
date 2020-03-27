@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 '''
 python utils too small for a package
@@ -9,9 +9,14 @@ import shutil
 import socket
 import subprocess
 
+from datetime import datetime
+
 import psutil
 
 from khnum.khnum import hnum
+
+__author__ = 'siznax'
+__version__ = '0.1'
 
 
 def ago(dstr):
@@ -28,8 +33,8 @@ def ago(dstr):
 
     then = datetime(
         int(dstr[:4]),  # year
-        int(dstr[5:7] if dstr[5:7] else 0),  # month
-        int(dstr[8:10] if dstr[8:10] else 0),  # day
+        int(dstr[5:7] if dstr[5:7] else 1),  # month
+        int(dstr[8:10] if dstr[8:10] else 1),  # day
         int(dstr[11:13] if dstr[11:13] else 0),  # hours
         int(dstr[14:16] if dstr[14:16] else 0),  # minutes
         int(dstr[17:19] if dstr[17:19] else 0))  # seconds
@@ -95,4 +100,4 @@ def system(basepath):
     cpu = psutil.cpu_percent()
     vmem = dict(psutil.virtual_memory()._asdict())
 
-    return '{} {} %cpu {} %vmem {}'.format(host, cpu, vmem['percent'], space)
+    return '{} {}%cpu {}%vmem {}'.format(host, cpu, vmem['percent'], space)
